@@ -1,7 +1,18 @@
-#deckImage{
-    width: 100px;
-    height: 100px;
+body{
+    background-color: rgb(84, 184, 84);
 }
-#scoreLabel{
-    margin-left: 5px;
+#deckImage {
+	width: 100px;
+	height: 100px;
+}
+#scoreLabel {
+	margin-left: 5px;
+}
+.score-wrapper{
+    text-align: center;
+}
+.card-wrapper {
+	display: flex;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
 }
