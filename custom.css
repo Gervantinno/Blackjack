@@ -1,5 +1,5 @@
-body{
-    background-color: rgb(84, 184, 84);
+body {
+	background-color: rgb(84, 184, 84);
 }
 #deckImage {
 	width: 100px;
@@ -8,11 +8,20 @@ body{
 #scoreLabel {
 	margin-left: 5px;
 }
-.score-wrapper{
-    text-align: center;
+.score-wrapper {
+	text-align: center;
 }
 .card-wrapper {
 	display: flex;
 	justify-content: space-evenly;
 	flex-wrap: wrap;
+	min-height: 30vh;
+}
+.hidden-image {
+	content: url("images/hidden.png");
+}
+.card-image {
+	/*images size is 5/7*/
+	width: 20vh;
+	height: 28vh;
 }

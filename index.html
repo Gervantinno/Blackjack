@@ -8,6 +8,8 @@
 		<script type="module" src="script.js"></script>
 	</head>
 	<body>
+		<p>Opponent's hand:</p>
+		<div class="card-wrapper enemy"></div>
 		<p>Press the image to continue</p>
 		<img
 			id="deckImage"
@@ -17,7 +19,9 @@
 			<span class="score-text">Your score is - </span>
 			<span id="scoreLabel">0</span>
 		</div>
-		<p>Your current hand:</p>
-		<div class="card-wrapper"></div>
+		<button id="endGameButton">Check</button>
+		<p>Your hand:</p>
+		<div class="card-wrapper you"></div>
+		
 	</body>
 </html>

@@ -3,10 +3,14 @@
 //the image we click on
 const deck = document.getElementById("deckImage");
 //the div in which we will put our cards
-const handList = document.querySelector(".card-wrapper");
+const handList = document.querySelector(".you");
+//the div in which we will put enemy's cards
+const opponentHandList = document.querySelector(".enemy");
 //our current score
 const score = document.getElementById("scoreLabel");
 //the object array with all available cards
+const endBtn = document.getElementById("endGameButton");
+
 var hand = [
 	{
 		name: "2",
@@ -75,6 +79,8 @@ var hand = [
 	},
 ];
 
+var botHandScore = 0;
+
 deck.addEventListener("click", () => {
 	var index = Math.floor(Math.random() * hand.length);
 
@@ -83,19 +89,71 @@ deck.addEventListener("click", () => {
 	var image = document.createElement("img");
 	image.src = hand[index].imageSrc;
 	//images size is 5/7
-	image.style.width = "200px";
-	image.style.height = "280px";
+	image.classList.add("card-image");
 
 	handList.appendChild(image);
 
 	hand.splice(index, 1);
 
-	gameState();
+	var index = Math.floor(Math.random() * hand.length);
+	botHandScore += hand[index].value;
+
+	var image = document.createElement("img");
+	image.src = hand[index].imageSrc;
+	//class for sizing
+	image.classList.add("card-image");
+	//we don't want to see other's player cards
+	image.classList.add("hidden-image");
+
+	opponentHandList.appendChild(image);
+
+	hand.splice(index, 1);
+
+	var state = gameState();
+	if (state !== "Continue") {
+		handReveal(opponentHandList);
+		alert(state);
+		location.reload(true);
+	}
+});
+
+endBtn.addEventListener("click", () => {
+	var state = gameState();
+	if (state === "Continue") {
+		if (score.textContent == botHandScore) state = "Draw";
+		else if (score.textContent > botHandScore) state = "You've won";
+		else state = "You've lost";
+	}
+	handReveal(opponentHandList);
+	alert(state);
+	location.reload(true);
 });
 
 function gameState() {
-	if (score.textContent < 21) return;
-	if (score.textContent == 21) alert("You won");
-	if (score.textContent > 21) alert("You've lost");
-	location.reload();
+	//both of players can play on
+	if (score.textContent < 21 && botHandScore < 21) {
+		return "Continue";
+	}
+	if (
+		score.textContent == botHandScore ||
+		(score.textContent > 21 && botHandScore > 21)
+	) {
+		//else we both win or lose, which means draw
+		return "Draw";
+	}
+	//in this cade we don't care what the opponent has
+	if (score.textContent == 21) return "You've won";
+	//in this cade we also don't care what the opponent has
+	if (score.textContent > 21) return "You've lost";
+	//if we got here then we have less than 21
+	if (botHandScore == 21) return "You've lost";
+	//last possible case is that we have less than 21 and bot has more than 21
+	return "You've won";
+}
+
+//after the end of the game show opponent's cards
+function handReveal(hand) {
+	hand.querySelectorAll("img").forEach((element) => {
+		element.classList.remove("hidden-image");
+	});
 }
