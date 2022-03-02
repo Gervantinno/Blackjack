@@ -1,15 +1,14 @@
 body {
 	background-color: rgb(84, 184, 84);
+	margin: 0;
 }
-#deckImage {
+.deckImage {
+	grid-column: 2;
 	width: 100px;
 	height: 100px;
 }
-#scoreLabel {
+.scoreLabel {
 	margin-left: 5px;
-}
-.score-wrapper {
-	text-align: center;
 }
 .card-wrapper {
 	display: flex;
@@ -24,4 +23,37 @@ body {
 	/*images size is 5/7*/
 	width: 20vh;
 	height: 28vh;
+}
+.hidden {
+	display: none !important;
+}
+.hand-wrapper {
+	height: 35vh;
+	text-align: center;
+}
+.menu-wrapper {
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	height: 20vh;
+}
+.menu-wrapper button {
+	height: fit-content;
+	padding: 0.3em 1em;
+}
+.main-container {
+	display: flex;
+	justify-content: space-between;
+}
+.on-game {
+	display: grid;
+	grid-template-columns: repeat(3, 150px);
+	justify-items: center;
+	align-items: center;
+}
+
+.after-game {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }

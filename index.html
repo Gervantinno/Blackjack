@@ -8,20 +8,38 @@
 		<script type="module" src="script.js"></script>
 	</head>
 	<body>
-		<p>Opponent's hand:</p>
-		<div class="card-wrapper enemy"></div>
-		<p>Press the image to continue</p>
-		<img
-			id="deckImage"
-			src="https://images.ctfassets.net/y7ui5ki2rjjh/1tXEqOqbHGi0pXGJVWxQQa/0d660e3707b3af67383a2a107ca35799/Tarot_Card_.png"
-		/>
-		<div class="score-wrapper">
-			<span class="score-text">Your score is - </span>
-			<span id="scoreLabel">0</span>
+		<div class="main-containter">
+			<div class="hand-wrapper">
+				<p>Opponent's hand:</p>
+				<div class="card-wrapper enemy"></div>
+				<div>
+					<span class="score-text opponent-score hidden"
+						>Opponent's score is -
+					</span>
+				</div>
+			</div>
+			<div class="menu-wrapper">
+				<div class="on-game">
+					<span class="press-hint">Press the image to continue</span>
+					<img
+						class="deckImage"
+						src="https://images.ctfassets.net/y7ui5ki2rjjh/1tXEqOqbHGi0pXGJVWxQQa/0d660e3707b3af67383a2a107ca35799/Tarot_Card_.png"
+					/>
+					<button class="endGameButton">Check</button>
+				</div>
+				<div class="after-game hidden">
+					<p class="game-result"></p>
+					<button class="reloadBtn">Try again!</button>
+				</div>
+			</div>
+			<div class="hand-wrapper">
+				<div>
+					<span class="score-text">Your score is - </span>
+					<span class="scoreLabel">0</span>
+				</div>
+				<p>Your hand:</p>
+				<div class="card-wrapper you"></div>
+			</div>
 		</div>
-		<button id="endGameButton">Check</button>
-		<p>Your hand:</p>
-		<div class="card-wrapper you"></div>
-		
 	</body>
 </html>

@@ -1,15 +1,15 @@
 "use strict";
 
 //the image we click on
-const deck = document.getElementById("deckImage");
+const deckImage = document.querySelector(".deckImage");
 //the div in which we will put our cards
 const handList = document.querySelector(".you");
 //the div in which we will put enemy's cards
 const opponentHandList = document.querySelector(".enemy");
 //our current score
-const score = document.getElementById("scoreLabel");
+const score = document.querySelector(".scoreLabel");
 //the object array with all available cards
-const endBtn = document.getElementById("endGameButton");
+const endBtn = document.querySelector(".endGameButton");
 
 var hand = [
 	{
@@ -81,7 +81,8 @@ var hand = [
 
 var botHandScore = 0;
 
-deck.addEventListener("click", () => {
+deckImage.addEventListener("click", () => {
+	document.querySelector(".press-hint").classList.add("hidden");
 	var index = Math.floor(Math.random() * hand.length);
 
 	score.textContent = parseInt(score.textContent) + hand[index].value;
@@ -111,9 +112,7 @@ deck.addEventListener("click", () => {
 
 	var state = gameState();
 	if (state !== "Continue") {
-		handReveal(opponentHandList);
-		alert(state);
-		location.reload(true);
+		gameEnd(state);
 	}
 });
 
@@ -124,9 +123,11 @@ endBtn.addEventListener("click", () => {
 		else if (score.textContent > botHandScore) state = "You've won";
 		else state = "You've lost";
 	}
-	handReveal(opponentHandList);
-	alert(state);
-	location.reload(true);
+	gameEnd(state);
+});
+
+document.querySelector(".reloadBtn").addEventListener("click", () => {
+	location.reload();
 });
 
 function gameState() {
@@ -149,6 +150,17 @@ function gameState() {
 	if (botHandScore == 21) return "You've lost";
 	//last possible case is that we have less than 21 and bot has more than 21
 	return "You've won";
+}
+
+function gameEnd(state) {
+	document.querySelector(".game-result").textContent = state;
+	var oppScore = document.querySelector(".opponent-score");
+	oppScore.textContent += botHandScore;
+	oppScore.classList.remove("hidden");
+	handReveal(opponentHandList);
+
+	document.querySelector(".on-game").classList.add("hidden");
+	document.querySelector(".after-game").classList.remove("hidden");
 }
 
 //after the end of the game show opponent's cards
